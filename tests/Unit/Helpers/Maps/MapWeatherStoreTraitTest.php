@@ -35,9 +35,9 @@ class MapWeatherStoreTraitTest extends BaseTestCase
 
     private function checkDto($dto) {
         $this->assertEquals('Test city name', $dto->cityName);
-        $this->assertEquals('-10', $dto->minTmp);
-        $this->assertEquals('52', $dto->maxTmp);
-        $this->assertEquals('52', $dto->maxTmp);
+        $this->assertEquals(-10, $dto->minTmp);
+        $this->assertEquals(52, $dto->maxTmp);
+        $this->assertEquals(15.6, $dto->windSpd);
         $this->assertEquals('2023-11-18 12:00:00', $dto->timestampDt);
     }
 
@@ -53,10 +53,10 @@ class MapWeatherStoreTraitTest extends BaseTestCase
     {
         return (object)[
             'cityName' => 'Test city name',
-            'minTmp' => '-10',
-            'maxTmp' => '52',
-            'windSpd' => '15.6',
-            'timestampDt' => '1700308800'
+            'minTmp' => -10,
+            'maxTmp' => 52,
+            'windSpd' => 15.6,
+            'timestampDt' => 1700308800
         ];
     }
 }

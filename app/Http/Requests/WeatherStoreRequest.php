@@ -19,10 +19,10 @@ class WeatherStoreRequest extends FormRequest
     {
         return [
             'cityName'    => 'required|string',
-            'minTmp'      => 'required|string',
-            'maxTmp'      => 'required|string',
-            'windSpd'     => 'required|string',
-            'timestampDt' => 'required|string',
+            'minTmp'      => 'required|numeric|between:-100,100',
+            'maxTmp'      => 'required|numeric|between:-100,100',
+            'windSpd'     => 'required|numeric|between:0,400',
+            'timestampDt' => 'required|numeric|between: 1,4102444800',
         ];
     }
 

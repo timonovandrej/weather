@@ -21,6 +21,22 @@ class WeatherRepositoryTest extends BaseTestCase
     }
 
     /**
+     * Store city. Weather exist. Lower case. It means cityName 'test-1' is same 'TEST-1' or 'tESt-1'
+     */
+    public function testStoreExistLowerCase()
+    {
+        $this->checkId1MinTmp('12.2');
+
+        $dto  = $this->getStubWeatherEditLowerCaseDto();
+        $itemId = $this->repository->store($dto);
+
+        $this->assertEquals(1, $itemId);
+
+        $this->checkId1MinTmp('-100');
+    }
+
+
+    /**
      * Store city. Weather exist
      */
     public function testStoreExist()

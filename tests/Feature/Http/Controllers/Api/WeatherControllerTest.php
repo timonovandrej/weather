@@ -3,14 +3,12 @@
 namespace Tests\Feature\Http\Controllers\Api;
 
 use App\Repositories\WeatherRepository;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\BaseTestCase;
 use Tests\Stub\StubWeather;
 
 
 class WeatherControllerTest extends BaseTestCase
 {
-    use WithoutMiddleware;
     use StubWeather;
 
     public function __construct($name = null)
@@ -21,75 +19,64 @@ class WeatherControllerTest extends BaseTestCase
     }
 
     /**
-     * Priority, wrong value validation
+     * Store weather. Validation
      */
-    public function testSearchPriorityValidationValueWrong()
+    public function testStoreValidation()
     {
         $this
-            ->json('GET', $this->api(), $this->priorityValidationValueRequest())
+            ->json('POST', $this->api())
             ->assertStatus(422)
-            ->assertJsonStructure($this->jsonStructureSearchValidation2())
-            ->assertJsonPath('message', 'The selected priority.value is invalid.');
+            ->assertJsonStructure($this->jsonStructureStoreValidation())
+            ->assertJsonPath('message', 'The city name field is required. (and 4 more errors)')
+            ->assertJsonPath('errors.cityName.0', 'The city name field is required.')
+            ->assertJsonPath('errors.minTmp.0', 'The min tmp field is required.')
+            ->assertJsonPath('errors.maxTmp.0', 'The max tmp field is required.')
+            ->assertJsonPath('errors.windSpd.0', 'The wind spd field is required.')
+            ->assertJsonPath('errors.timestampDt.0', 'The timestamp dt field is required.');
     }
 
     /**
-     * Priority, wrong type validation
+     * Store weather. Validation wrong types
      */
-    public function testSearchPriorityValidationTypeWrong()
+    public function testStoreValidationWrongTypes()
     {
         $this
-            ->json('GET', $this->api(), $this->priorityValidationRequest())
+            ->json('POST', $this->api(), $this->storeValidationWrongTypeRequest())
             ->assertStatus(422)
-            ->assertJsonStructure($this->jsonStructureSearchValidation())
-            ->assertJsonPath('message', 'The priority.value must be an array. (and 1 more error)');
+            ->assertJsonStructure($this->jsonStructureStoreValidation())
+            ->assertJsonPath('message', 'The city name must be a string. (and 4 more errors)')
+            ->assertJsonPath('errors.cityName.0', 'The city name must be a string.')
+            ->assertJsonPath('errors.minTmp.0', 'The min tmp must be a number.')
+            ->assertJsonPath('errors.maxTmp.0', 'The max tmp must be between -100 and 100.')
+            ->assertJsonPath('errors.windSpd.0', 'The wind spd must be between 0 and 400.')
+            ->assertJsonPath('errors.timestampDt.0', 'The timestamp dt must be between  1 and 4102444800.');
     }
 
     /**
-     * All filters
+     * Store weather
      */
-    public function testSearchAllFilters()
+    public function testStore()
     {
         $this
-            ->json('GET', $this->api(), $this->allFiltersRequest())
+            ->json('POST', $this->api(), $this->storeRequest())
             ->assertStatus(200)
-            ->assertJsonStructure($this->jsonStructureOne());
+            ->assertJsonStructure($this->jsonStructureStore())
+            ->assertJsonFragment(['data' => 4]);
     }
-
-    /**
-     * Get all items without any filters
-     */
-    public function testSearchNoFilters()
-    {
-        $this
-            ->json('GET', $this->api())
-            ->assertStatus(200)
-            ->assertJsonStructure($this->jsonStructureOne());
-    }
-
-    /**
-     * Priority, type 'is' value '[1, 2]'
-     */
-    public function testSearchPriorityArrayOk()
-    {
-        $this
-            ->json('GET', $this->api(), $this->priorityArrayRequest())
-            ->assertStatus(200)
-            ->assertJsonStructure($this->jsonStructureOne());
-    }
-
 
     /**
      * Get weather. City name wrong type
      */
-    public function testGetCityNameWrongTypeValidation() //TODO 1 FIXME 1
+    public function testGetCityNameWrongTypeValidation()
     {
         $this
-            ->json('GET', $this->api(), $this->getWrongTypeValidationRequest())
+            ->json('GET', $this->api(), $this->getRequest(11))
             ->assertStatus(422)
             ->assertJsonStructure($this->jsonStructureGetValidation())
             ->assertJsonPath('message', 'The city name must be a string.')
             ->assertJsonPath('errors.cityName.0', 'The city name must be a string.');
     }
+
     /**
      * Get weather. Empty city. No param
      */
@@ -111,7 +98,8 @@ class WeatherControllerTest extends BaseTestCase
         $this
             ->json('GET', $this->api(), $this->getRequest('WrongCityName'))
             ->assertStatus(200)
-            ->assertJsonStructure($this->jsonStructureEmptyData());
+            ->assertJsonStructure($this->jsonStructureStore())
+            ->assertJsonFragment(['data' => null]);
     }
 
     /**
@@ -165,17 +153,6 @@ class WeatherControllerTest extends BaseTestCase
         ];
     }
 
-    private function jsonStructureSearchValidation(): array
-    {
-        return [
-            'errors' => [
-                'priority.value',
-                'priority.type',
-            ],
-            'message',
-        ];
-    }
-
     private function jsonStructureGetValidation(): array
     {
         return [
@@ -186,10 +163,40 @@ class WeatherControllerTest extends BaseTestCase
         ];
     }
 
+    private function jsonStructureStoreValidation(): array
+    {
+        return [
+            'errors' => [
+                'cityName',
+                'minTmp',
+                'maxTmp',
+                'windSpd',
+                'timestampDt',
+            ],
+            'message',
+        ];
+    }
+
     private function jsonStructureOne(): array
     {
         return [
-            'data' => $this->jsonStructureWeather()
+            'data' => [
+                'id',
+                'city_name',
+                'min_tmp',
+                'max_tmp',
+                'wind_spd',
+                'timestamp_dt',
+                'created_at',
+                'updated_at',
+            ]
+        ];
+    }
+
+    private function jsonStructureStore(): array
+    {
+        return [
+            'data'
         ];
     }
 
@@ -200,17 +207,32 @@ class WeatherControllerTest extends BaseTestCase
         ];
     }
 
-    private function getRequest(string $cityName): array
+    private function getRequest(string|int $cityName): array
     {
         return [
             'cityName' => $cityName,
         ];
     }
 
-    private function getWrongTypeValidationRequest(): array
+    private function storeRequest(): array
     {
         return [
-            'cityName' => 22,
+            'cityName'    => 'Test city name',
+            'minTmp'      => -10,
+            'maxTmp'      => 52,
+            'windSpd'     => 15.6,
+            'timestampDt' => 1700308800
+        ];
+    }
+
+    private function storeValidationWrongTypeRequest(): array
+    {
+        return [
+            'cityName'    => 23,
+            'minTmp'      => 'StringBytNotNumber',
+            'maxTmp'      => -500,
+            'windSpd'     => 602,
+            'timestampDt' => '7258118405'
         ];
     }
 }
