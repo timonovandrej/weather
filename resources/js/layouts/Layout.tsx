@@ -1,0 +1,23 @@
+import {Box, Container} from "@mui/material";
+
+type Props = {
+    children: React.ReactNode;
+}
+
+const stylesContent = {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+}
+
+export const Layout = ({children}: Props) => {
+    return (
+        <Container maxWidth='md'>
+            <h1>Simple weather application</h1>
+
+            <Box sx={stylesContent}>
+                {children}
+            </Box>
+        </Container>
+    )
+}

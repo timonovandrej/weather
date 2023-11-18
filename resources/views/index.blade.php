@@ -12,7 +12,7 @@
 <body>
     <div id="root"></div>
     @viteReactRefresh
-    @vite(['resources/js/main.tsx'])
+    @vite(['resources/js/index.tsx'])
 </body>
 
 </html>

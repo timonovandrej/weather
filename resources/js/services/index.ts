@@ -1,0 +1,1 @@
+export {solarService} from './solarService';
