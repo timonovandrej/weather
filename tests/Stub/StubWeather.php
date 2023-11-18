@@ -10,33 +10,33 @@ trait StubWeather
 {
     public function stubAddWeathers(): void
     {
+        $dates = [
+            'timestamp_dt' => Carbon::create(2020, 10, 25, 12, 00),
+            'created_at'   => Carbon::create(2000, 10, 25, 10, 00),
+            'updated_at'   => Carbon::create(2000, 10, 25, 10, 00),
+        ];
+
         $values = [
             [
                 'city_name'    => 'test-city-1',
                 'min_tmp'      => 12.2,
                 'max_tmp'      => 33.2,
                 'wind_spd'     => 15.6,
-                'timestamp_dt' => Carbon::create(2020, 10, 25, 12, 00),
-                'created_at'   => Carbon::create(2000, 10, 25, 10, 00),
-                'updated_at'   => Carbon::create(2000, 10, 25, 10, 00),
+                ...$dates
             ],
             [
                 'city_name'    => 'test-city-2',
                 'min_tmp'      => 14.2,
                 'max_tmp'      => 35.2,
                 'wind_spd'     => 2.6,
-                'timestamp_dt' => Carbon::create(2020, 10, 25, 12, 00),
-                'created_at'   => Carbon::create(2000, 10, 25, 12, 00),
-                'updated_at'   => Carbon::create(2000, 10, 25, 12, 00),
+                ...$dates
             ],
             [
                 'city_name'    => 'test-city-3',
                 'min_tmp'      => -14.2,
                 'max_tmp'      => 2.2,
                 'wind_spd'     => 2.6,
-                'timestamp_dt' => Carbon::create(2020, 10, 25, 12, 00),
-                'created_at'   => Carbon::create(2000, 10, 25, 12, 00),
-                'updated_at'   => Carbon::create(2000, 10, 25, 12, 00),
+                ...$dates
             ],
         ];
 
