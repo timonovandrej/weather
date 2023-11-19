@@ -1,7 +1,7 @@
 import {Box, Button, TextField} from '@mui/material';
 import {observer} from 'mobx-react-lite';
 import {weatherStore} from '../stores';
-import {changeCityName, getWeatherFromApi} from '../actions';
+import {changeCityName, getWeatherFromApi, getWeatherFromDb} from '../actions';
 
 export const stylesBox = {
     display: 'flex',
@@ -27,7 +27,7 @@ export const Search = observer(() => {
                 sx={stylesInput}
                 value={cityName}
                 onChange={(event) => changeCityName(event.currentTarget.value)}
-                placeholder='City name must be longer 3 symbols'
+                placeholder='The city name must be more than 3 characters'
             />
 
             <Button
@@ -42,6 +42,7 @@ export const Search = observer(() => {
             <Button
                 variant='contained'
                 color='primary'
+                onClick={getWeatherFromDb}
                 disabled={isButtonDisabled}
             >
                 Get from DB

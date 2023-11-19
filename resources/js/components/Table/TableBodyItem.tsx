@@ -10,8 +10,8 @@ export const TableBodyItem = (props: ItemType) => {
     return (
         <tr>
             <td>{date}</td>
-            <td>{maxTmp} &deg;C</td>
             <td>{minTmp} &deg;C</td>
+            <td>{maxTmp} &deg;C</td>
             <td>{windSpd} km\h</td>
         </tr>
     )

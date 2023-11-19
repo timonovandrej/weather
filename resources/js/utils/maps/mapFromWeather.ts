@@ -13,7 +13,7 @@ export const mapFromWeather = (response: any): WeatherType[] => {
             minTmp: temp_min,
             maxTmp: temp_max,
             windSpd: wind.speed,
-            timestamp: dt,
+            timestampDt: dt,
             date: getFormattedDate(dt),
         }
     });

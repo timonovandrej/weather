@@ -1,10 +1,11 @@
 import {Box} from '@mui/material';
-import {TableBodyItem, TableEmptyData, TableHeader} from '.';
+import {TableBodyItem, TableHeader} from '.';
+import {EmptyData} from '..';
 import {observer} from 'mobx-react-lite';
 import {weatherStore} from '../../stores';
 import {WeatherType} from '../../types';
 
-export const stylesBox = {
+const stylesBox = {
     display: 'flex',
 
     'table': {
@@ -24,7 +25,7 @@ export const Table = observer(() => {
     const {items} = weatherStore;
 
     if (items.length === 0) {
-        return <TableEmptyData />
+        return <EmptyData />
     }
 
     return (

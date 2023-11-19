@@ -1,5 +1,5 @@
 import {cloneDeep} from 'lodash';
-import {GetParamsType} from '../../services/weatherApiService';
+import {GetParamsType} from '../../types';
 
 export const mapToWeatherApi = (params: GetParamsType): GetParamsType => {
     const clone: any = cloneDeep(params);

@@ -1,8 +1,10 @@
 import {Box, Button} from '@mui/material';
 import {observer} from 'mobx-react-lite';
 import {weatherStore} from '../stores';
+import {onSave} from '../actions';
+import {EmptyData} from '.';
 
-export const stylesBox = {
+const stylesBox = {
     display: 'flex',
     gap: '10px',
     flexDirection: 'column',
@@ -12,7 +14,16 @@ export const stylesBox = {
 };
 
 export const Details = observer(() => {
-    const {cityName, startAt, endAt} = weatherStore.details
+    const {cityName, startAt, endAt} = weatherStore.details;
+    const isButtonDisabled = weatherStore.items.length === 0;
+
+    if (!cityName) {
+        return (
+            <Box sx={stylesBox}>
+                <EmptyData />
+            </Box>
+        )
+    }
 
     return (
         <Box sx={stylesBox}>
@@ -21,7 +32,14 @@ export const Details = observer(() => {
             <div>Start at {startAt}</div>
             <div>End at {endAt}</div>
 
-            <Button variant='contained' color='success'>Save forecast</Button>
+            <Button
+                variant='contained'
+                color='success'
+                disabled={isButtonDisabled}
+                onClick={onSave}
+            >
+                Save forecast
+            </Button>
         </Box>
     )
 })
