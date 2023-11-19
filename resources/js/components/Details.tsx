@@ -1,7 +1,6 @@
-import {Box, Button} from "@mui/material";
+import {Box, Button} from '@mui/material';
 
 export const stylesBox = {
-    width: '100%',
     display: 'flex',
     gap: '10px',
     flexDirection: 'column',
@@ -9,12 +8,6 @@ export const stylesBox = {
     margin: '30px 0',
     padding: '0 10px 10px 10px'
 };
-
-export const stylesInput = {
-    display: 'flex',
-    flexGrow: 1,
-    marginRight: '30px',
-}
 
 export const Details = () => {
     const cityName = 'City Name';

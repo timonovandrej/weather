@@ -1,7 +1,7 @@
 import React from 'react';
 import {observer} from 'mobx-react-lite';
 import {Box, CircularProgress} from '@mui/material';
-import {loadingStore} from "../stores";
+import {loadingStore} from '../stores';
 
 const stylesBox = {
     width: '100%',

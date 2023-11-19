@@ -1,8 +1,7 @@
 export type WeatherType = {
-    id: number;
-	cityName: string;
     minTmp: number;
     maxTmp: number;
     windSpd: number;
+    timestamp: number;
     date: string;
 };

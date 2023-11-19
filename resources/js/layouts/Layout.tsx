@@ -1,4 +1,5 @@
-import {Box, Container} from "@mui/material";
+import {Box, Container} from '@mui/material';
+import React from 'react';
 
 type Props = {
     children: React.ReactNode;

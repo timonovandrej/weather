@@ -1,1 +1,1 @@
-export {solarService} from './solarService';
+export {weatherApiService} from './weatherApiService';
