@@ -1,6 +1,6 @@
 import {weatherStore} from '../stores';
 import {weatherApiService} from '../services';
-import {mapFromWeather, mapToWeatherApi} from '../utils';
+import {mapFromDetails, mapFromWeather, mapToWeatherApi} from '../utils';
 
 export const getWeatherFromApi = async () => {
     const q = weatherStore.cityName;
@@ -10,5 +10,6 @@ export const getWeatherFromApi = async () => {
 
     if (status === 200) {
         weatherStore.items = mapFromWeather(data);
+        weatherStore.details = mapFromDetails(data);
     }
 }
