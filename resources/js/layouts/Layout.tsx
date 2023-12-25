@@ -14,7 +14,7 @@ const stylesContent = {
 export const Layout = ({children}: Props) => {
     return (
         <Container maxWidth='md'>
-            <h1>Simple weather application</h1>
+            <h1>Simple application</h1>
 
             <Box sx={stylesContent}>
                 {children}
