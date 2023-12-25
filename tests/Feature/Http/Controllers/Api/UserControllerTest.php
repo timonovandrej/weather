@@ -19,6 +19,25 @@ class UserControllerTest extends BaseTestCase
     }
 
     /**
+     * Delete user. Wrong id
+     */
+    public function testDestroyWrongId()
+    {
+        $response = $this->json('DELETE', $this->api(-1));
+        $this->checkIdInvalid($response);
+    }
+
+    /**
+     * Delete user
+     */
+    public function testDestroy()
+    {
+        $this
+            ->json('DELETE', $this->api(1))
+            ->assertStatus(200);
+    }
+
+    /**
      * Edit user. Wrong user id
      */
     public function testEditWrongUserId()
