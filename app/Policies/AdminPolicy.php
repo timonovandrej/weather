@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\User;
+use App\Models\Currency;
 
 class AdminPolicy
 {
-    public function crud(User $user): bool
+    public function crud(Currency $user): bool
     {
         return $user->role === 'admin';
     }

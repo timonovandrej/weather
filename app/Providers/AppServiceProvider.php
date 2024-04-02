@@ -2,27 +2,18 @@
 
 namespace App\Providers;
 
+use App\Helpers\Interfaces\ApiHelperInterface;
+use App\Helpers\MonobankApiHelper;
+use App\Repositories\CurrencyRepository;
+use App\Repositories\Interfaces\CurrencyRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
+
     public function register()
     {
-        //
-    }
-
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        //
+        $this->app->bind(ApiHelperInterface::class, MonobankApiHelper::class);
+        $this->app->bind(CurrencyRepositoryInterface::class, CurrencyRepository::class);
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\CurrencyController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('auth')->group(function () {
-    Route::get('/login', [UserController::class, 'index']);
+Route::prefix('currency')->group(function () {
+    Route::get('/', [CurrencyController::class, 'index']);
 });
