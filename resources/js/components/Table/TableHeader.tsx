@@ -2,10 +2,12 @@ export const TableHeader = () => {
     return (
         <thead>
             <tr>
-                <th>Datetime</th>
-                <th>Min tmp</th>
-                <th>Max tmp</th>
-                <th>Wind speed</th>
+                <th>Date</th>
+                <th>Currency1</th>
+                <th>Currency2</th>
+                <th>Buy</th>
+                <th>Sell</th>
+                <th>Cross</th>
             </tr>
         </thead>
     )

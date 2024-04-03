@@ -1,18 +1,20 @@
-import {WeatherType} from '../../types';
+import {CurrencyType} from '../../types';
 
 type ItemType = {
-    item: WeatherType
+    item: CurrencyType
 }
 
 export const TableBodyItem = (props: ItemType) => {
-    const {maxTmp, minTmp, windSpd, date} = props.item;
+    const {codeA, codeB, rateBuy, rateSell, rateCross, date} = props.item;
 
     return (
         <tr>
             <td>{date}</td>
-            <td>{minTmp} &deg;C</td>
-            <td>{maxTmp} &deg;C</td>
-            <td>{windSpd} km\h</td>
+            <td>{codeA}</td>
+            <td>{codeB}</td>
+            <td>{rateBuy}</td>
+            <td>{rateSell}</td>
+            <td>{rateCross}</td>
         </tr>
     )
 }

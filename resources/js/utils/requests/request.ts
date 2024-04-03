@@ -1,10 +1,11 @@
 import {generatePath} from 'react-router-dom';
 import axios from 'axios';
 import {loadingStore} from '../../stores';
+import {API_BASE_URL} from '../../consts';
 
-export const request = async (baseURL:string, method: string, url: string, params: object = {}) => {
+export const request = async (method: string, url: string, params: object = {}) => {
 	const config = await axios.create({
-		baseURL,
+		baseURL: API_BASE_URL
 	});
 
 	let instance;

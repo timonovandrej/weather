@@ -1,2 +1,2 @@
 export {loadingStore} from './loadingStore';
-export {weatherStore} from './weatherStore';
+export {currencyStore} from './currencyStore';

@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\Interfaces\CurrencyRepositoryInterface;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
 
 
 class CurrencyController extends Controller

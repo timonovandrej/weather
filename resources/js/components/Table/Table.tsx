@@ -2,8 +2,10 @@ import {Box} from '@mui/material';
 import {TableBodyItem, TableHeader} from '.';
 import {EmptyData} from '..';
 import {observer} from 'mobx-react-lite';
-import {weatherStore} from '../../stores';
-import {WeatherType} from '../../types';
+import {currencyStore} from '../../stores';
+import {CurrencyType} from '../../types';
+import {useEffect} from 'react';
+import {getCurrency} from '../../actions';
 
 const stylesBox = {
     display: 'flex',
@@ -22,7 +24,12 @@ const stylesBox = {
 };
 
 export const Table = observer(() => {
-    const {items} = weatherStore;
+    useEffect(() => {
+        getCurrency()
+    }, []);
+
+
+    const {items} = currencyStore;
 
     if (items.length === 0) {
         return <EmptyData />
@@ -35,7 +42,7 @@ export const Table = observer(() => {
                 <tbody>
                 {
                     items.map(
-                        (item:WeatherType, i:number) => <TableBodyItem key={`item-key-${i}`} item={item} />
+                        (item:CurrencyType, i:number) => <TableBodyItem key={`item-key-${i}`} item={item} />
                     )
                 }
                 </tbody>
