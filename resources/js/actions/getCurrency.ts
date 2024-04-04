@@ -1,10 +1,10 @@
 import {currencyStore} from '../stores';
-import {currencyApiService} from '../services';
+import {currencyService} from '../services';
 import {mapFromCurrency} from '../utils';
 import {toast} from 'react-toastify';
 
 export const getCurrency = async () => {
-    const {data, status} = await currencyApiService.get();
+    const {data, status} = await currencyService.get();
 
     if (status === 200) {
         currencyStore.setRequestTime();

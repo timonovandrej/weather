@@ -8,8 +8,10 @@ export const currencyStore = makeAutoObservable({
     requestTime: '',
     items: [] as CurrencyType[],
 
-    get item():CurrencyType {
-        return cloneDeep(this.items[0]);
+    updateItems(items:CurrencyType[] ) {
+        const clone = cloneDeep(this.items);
+
+        this.items = {...clone, ...items}
     },
 
     setRequestTime() {

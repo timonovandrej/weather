@@ -4,8 +4,6 @@ import {EmptyData} from '..';
 import {observer} from 'mobx-react-lite';
 import {currencyStore} from '../../stores';
 import {CurrencyType} from '../../types';
-import {useEffect} from 'react';
-import {getCurrency} from '../../actions';
 
 const stylesBox = {
     display: 'flex',
@@ -24,11 +22,6 @@ const stylesBox = {
 };
 
 export const Table = observer(() => {
-    useEffect(() => {
-        getCurrency()
-    }, []);
-
-
     const {items} = currencyStore;
 
     if (items.length === 0) {

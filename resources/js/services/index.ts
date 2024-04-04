@@ -1,2 +1,2 @@
-export {currencyApiService} from './currencyApiService';
-export {weatherDbService} from './weatherDbService';
+export {currencyService} from './currencyService';
+export {socketService} from './socketService';
