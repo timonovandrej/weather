@@ -16,19 +16,21 @@ class StoreDto
     ) {
     }
 
-    public function getKey(): string {
-        return $this->codeA .'-'. $this->codeB;
+    public function getKey(): string
+    {
+        return $this->codeA . '-' . $this->codeB;
     }
 
-    public function toArray(): array {
+    public function toArray(): array
+    {
         return [
-            'codeA' => $this->codeA,
-            'codeB' => $this->codeB,
-            'date' => Carbon::createFromTimestamp($this->date),
-            'rateBuy' => $this->rateBuy,
-            'rateSell' => $this->rateSell,
+            'codeA'     => $this->codeA,
+            'codeB'     => $this->codeB,
+            'date'      => Carbon::createFromTimestamp($this->date),
+            'rateBuy'   => $this->rateBuy,
+            'rateSell'  => $this->rateSell,
             'rateCross' => $this->rateCross,
-            'key' => $this->getKey(),
+            'key'       => $this->getKey(),
         ];
     }
 }

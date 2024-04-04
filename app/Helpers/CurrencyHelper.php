@@ -16,7 +16,7 @@ class CurrencyHelper
         foreach ($newData as $newItem) {
             $oldItem = array_filter($oldData, fn($i) => $i['key'] === $newItem['key']);
 
-            $oldItem = ! empty($oldItem) ? $oldItem[0] : [];
+            $oldItem = count($oldItem) === 0 ? $oldItem[0] : [];
 
             foreach ($oldItem as $key => $oldValue) {
                 if (isset($newItem[$key]) && $oldValue != $newItem[$key]) {

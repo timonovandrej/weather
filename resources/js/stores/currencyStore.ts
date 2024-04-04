@@ -11,7 +11,16 @@ export const currencyStore = makeAutoObservable({
     updateItems(items:CurrencyType[] ) {
         const clone = cloneDeep(this.items);
 
-        this.items = {...clone, ...items}
+        clone.forEach((item, index) => {
+            items.forEach((i) => {
+                if (i.id === item.id) {
+                    clone[index] = i;
+                    return;
+                }
+            });
+        });
+
+        this.items = clone;
     },
 
     setRequestTime() {
