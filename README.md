@@ -1,4 +1,4 @@
-# Simple weather application
+# Simple test application
 
 Simple weather application
 
